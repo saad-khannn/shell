@@ -6,23 +6,23 @@ Built-in Commands:
 Command			Description
 -------                 -----------
 cd 			cd <directory> allows the user to change working directories.
-			cd (without a directory) takes the user to the HOME or ROOT directory.
+			cd without a directory takes the user to the HOME/ROOT directory.
 
-clr			clr will clear the entire screen.
+clr			clr clears the entire screen.
 
-dir 			dir <directory> will list the contents of any directory that is the child directory of the user's current directory.
-			dir (without a directory) will list the contents of the current directory.
+dir 			dir <directory> lists the contents of any directory that is the child directory of the user's current directory.
+			dir without a directory lists the contents of the current directory.
 
-environ 		environ lists all the environment strings.
+environ 		environ lists all the environment variables.
 
 echo			echo <comment> prints <comment> on the screen on the next line.
-			echo (without a comment) prints an empty new line.
+			echo without a comment prints an empty new line.
 
 help			help displays the readme page which explains how the built-in commands work.
 
-pause			pause will pause the operation of the shell until the 'ENTER' key is pressed again.
+pause			pause halts the operation of the shell until the 'ENTER' key is pressed again.
 
-quit			quit will make the user exit the shell.
+quit			quit makes the user exit the shell.
 
 
 
