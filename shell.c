@@ -22,7 +22,7 @@ void shell(){
     }
 }
 
-char *get_input(void){
+char *get_input(){
     char *input = NULL;
     size_t buffer = 64;
     getline(&input, &buffer, stdin); //Read the shell input and stores it in a buffer
