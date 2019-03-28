@@ -145,7 +145,7 @@ int cmd_echo(char **param){ //Built-in function for "echo" command
 
 int cmd_environ(){ //Built-in function for "environ" command
     for(int i = 0; environ[i] != NULL; i++) //Accesses extern char **environ and reads through it
-        printf("%s\n", environ[i]); //Prints environ to screen word by word
+        printf("%s\n", environ[i]); //Prints environment variables to screen
     return 1;
     }
 
