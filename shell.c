@@ -29,7 +29,7 @@ char *get_input(void){
     return input;
 }
 
-char **read_input(char *param){ //Read input from buffer and stores the command and its arguments into tokens
+char **read_input(char *args){ //Read input from buffer and stores the command and its arguments into tokens
     int i = 0;
     int buf = T_BUFSIZE;
     char *token1; //Singular token
@@ -39,7 +39,7 @@ char **read_input(char *param){ //Read input from buffer and stores the command 
         printf("An error has occurred\n");
         }
 
-    token1 = strtok(param, DELIM); //Splits up input entered into shell based on delimiters
+    token1 = strtok(args, DELIM); //Splits up input entered into shell based on delimiters
     while(token1 != NULL){
         token2[i] = token1; //Adds tokens and
         i++;                //reads until entire input is read
@@ -58,17 +58,17 @@ char **read_input(char *param){ //Read input from buffer and stores the command 
     return token2; //Gets the final input after it has been divided into command and its arguments
 }
 
-int exec(char **param){ //Execute built-in functions
+int exec(char **args){ //Execute built-in functions
     int i, s;
     pid_t pid;
 
-    if (param[0] == NULL){ //If no command was entered
+    if (args[0] == NULL){ //If no command was entered
         return 1; //Return nothing and keep looping shell
         }
 
     for (i = 0; i < BUILTINS; i++){
-        if (strcmp(param[0], builtin_cmds[i]) == 0){ //If input is within built-in functions
-            return (*builtin_funcs[i])(param); //Return given command
+        if (strcmp(args[0], builtin_cmds[i]) == 0){ //If input is within built-in functions
+            return (*builtin_funcs[i])(args); //Return given command
         }
     }
 
@@ -79,7 +79,7 @@ int exec(char **param){ //Execute built-in functions
         }
 
     else if (pid == 0){ // Child process
-        if(execvp(param[0], param) == -1){ //If input command isn't in args/Cannot be found
+        if(execvp(args[0], args) == -1){ //If input command isn't in args/Cannot be found
             printf("An error has occurred\n");
         }
         exit(0);
@@ -97,12 +97,12 @@ int exec(char **param){ //Execute built-in functions
 /***************************************** BUILT-IN COMMANDS ****************************************/
 /****************************************************************************************************/
 
-int cmd_cd(char **param){ //Built-in function for "cd" command
-    if(param[1] == NULL){ //If nothing is input after "cd"
+int cmd_cd(char **args){ //Built-in function for "cd" command
+    if(args[1] == NULL){ //If nothing is input after "cd"
         chdir(getenv("HOME")); //Change from current directory to home/root directory
         }
     else{
-        chdir(param[1]); //Else change to the directory that is input after "cd"
+        chdir(args[1]); //Else change to the directory that is input after "cd"
     }
     return 1;
 }
@@ -112,15 +112,15 @@ int cmd_clr(){ //Built-in function for "clr" command
     return 1;
     }
 
-int cmd_dir(char **param){ //Built-in function for "dir" command
+int cmd_dir(char **args){ //Built-in function for "dir" command
     DIR *directory;
     struct dirent *dir;
-    if(param[1] == NULL){ //If no argument after "dir"
+    if(args[1] == NULL){ //If no argument after "dir"
         directory = opendir("."); //Get the directory contents of the current directory
         }
     else{
-        if((directory = opendir(param[1])) == NULL){ //Check to see if directory exists. If it doesn't exist
-            printf("Directory does not exist: %s.\n", param[1]); //Then print error message
+        if((directory = opendir(args[1])) == NULL){ //Check to see if directory exists. If it doesn't exist
+            printf("Directory does not exist: %s.\n", args[1]); //Then print error message
             return 1;
             }
         }
@@ -133,10 +133,10 @@ int cmd_dir(char **param){ //Built-in function for "dir" command
     return 1;
     }
 
-int cmd_echo(char **param){ //Built-in function for "echo" command
+int cmd_echo(char **args){ //Built-in function for "echo" command
     int i = 1;
-    while(param[i] != NULL){ //If there is an input after "echo"
-        printf("%s ", param[i]); //Print the input word by word
+    while(args[i] != NULL){ //If there is an input after "echo"
+        printf("%s ", args[i]); //Print the input word by word
         i++; //Increment until end of line/phrase/sentence
         }
         printf("\n"); //New line to ensure it works like the UNIX "echo" command
@@ -175,8 +175,8 @@ int cmd_pause(){ //Built-in function for "pause" command
     return 1;
     }
 
-int cmd_quit(char **param){ //Built-in function for "quit" command
-    if(param[1] != NULL){ //If there's an argument
+int cmd_quit(char **args){ //Built-in function for "quit" command
+    if(args[1] != NULL){ //If there's an argument
         printf("An error has occured\n");
         return 1;
     }
