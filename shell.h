@@ -16,18 +16,18 @@
 #define T_BUFSIZE 256
 #define DELIM " \t\r\n\a"
 
-int cmd_cd(char **);
+int cmd_cd(char args**);
 int cmd_clr();
-int cmd_dir(char **);
-int cmd_echo(char **);
+int cmd_dir(char args**);
+int cmd_echo(char args**);
 int cmd_environ();
 int cmd_help();
 int cmd_pause();
-int cmd_quit(char **param);
+int cmd_quit(char **args);
 
-void shell(void);
-char *get_input(void);
-char **read_input(char *param);
-int exec(char **param);
+void shell();
+char *get_input();
+char **read_input(char *args);
+int exec(char **args);
 
 #endif
