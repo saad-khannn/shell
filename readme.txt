@@ -1,6 +1,6 @@
 Description:
 This is a simple Unix/Linux shell. It can accept 8 built-in commands through user input and can execute any of the built-in commands.
-The shell is an interactive loop and will continue accepting and executing inputs until the user inputs a quit command to end the loop close the shell.
+The shell is an interactive loop and will continue accepting and executing inputs until the user inputs a quit command to end the loop to close the shell.
 
 Built-in Commands:
 Command			Description
